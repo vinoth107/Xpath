@@ -1,0 +1,38 @@
+package hello;
+
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.server.handler.GoBack;
+import org.testng.annotations.Test;
+
+public class testing {
+	static WebDriver driver;
+public static void main(String[] args) {
+	
+
+		System.setProperty("webdriver.gecko.driver", "C:\\Users\\VINOTH KUMAR\\eclipse-workspace\\Selenium\\driver\\geckodriver.exe");
+		driver = new FirefoxDriver();
+		driver.get("https://in.yahoo.com/"); 	
+	    driver.findElement(By.xpath("//*[@id=\"uh-search-box\"]")).sendKeys("Selenium",Keys.ENTER);
+	    test2("5");
+	    
+	    
+}
+
+public static void test2 (String pageNumber) {
+	
+		List<WebElement> location = driver.findElements(By.xpath("//*[@id=\"yui_3_10_0_1_1551115429500_541\"]//div//div[1]//a"));
+		for (int i=1;i<= location.size();i++)	{
+			if (location.get(i).getText().equals(pageNumber)) {
+				location.get(i).findElement(By.tagName("a")).click();
+				break;
+			}
+		}
+		}
+}
