@@ -1,31 +1,35 @@
 package hello;
 
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 
 public class testing {
 	static WebDriver driver;
-public static void main(String[] args) {
+public static void main(String[] args) throws InterruptedException  {
 	
 
 		System.setProperty("webdriver.gecko.driver", "C:\\Users\\VINOTH KUMAR\\eclipse-workspace\\Selenium\\driver\\geckodriver.exe");
 		driver = new FirefoxDriver();
-		driver.get("https://www.flipkart.com/"); 	
+		driver.get("https://www.flipkart.com/"); 
 		driver.findElement(By.xpath("//button[@class='_2AkmmA _29YdH8']")).click();
-	    driver.findElement(By.name("q")).sendKeys("toys");
-	    driver.findElement(By.xpath("//button[@class='vh79eN']")).click();
-	    flipkart("Mega Bloks Build a Dinosaur CNV30");
-	    
+		getItemSearch("3","3","2");
+		
 }
+public static void getItemSearch(String num,String num2,String num3) throws InterruptedException {
 
-private static void flipkart(String title) {
+	String firstLocator= "//div[@id=\"container\"]/div/div[2]/div/ul/li[$]";
+    firstLocator =firstLocator.replace("$", num);
+	Actions ac=new Actions(driver);
+	ac.moveToElement(driver.findElement(By.xpath(firstLocator))).perform();
+	Thread.sleep(1000);
+	String secondLocator="//div[@id=\"container\"]/div/div[2]/div/ul/li[$]/ul/li/ul/li[^]/ul/li[#]/a";
+secondLocator =secondLocator.replace("$", num);
+secondLocator =secondLocator.replace("^", num2);
+secondLocator =secondLocator.replace("#", num3);
+	driver.findElement(By.xpath(secondLocator)).click();;
 	
-	String loc ="//a[@title='_']"; 
-	loc=loc.replace("_", title);
-	driver.findElement(By.xpath(loc)).click();
-    //driver.findElement(By.xpath("//*[@id=\"add-to-cart-button\"]")).click();
-}
-}
 
+	}				
+}	
