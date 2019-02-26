@@ -1,0 +1,31 @@
+package hello;
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class testing {
+	static WebDriver driver;
+public static void main(String[] args) {
+	
+
+		System.setProperty("webdriver.gecko.driver", "C:\\Users\\VINOTH KUMAR\\eclipse-workspace\\Selenium\\driver\\geckodriver.exe");
+		driver = new FirefoxDriver();
+		driver.get("https://www.flipkart.com/"); 	
+		driver.findElement(By.xpath("//button[@class='_2AkmmA _29YdH8']")).click();
+	    driver.findElement(By.name("q")).sendKeys("toys");
+	    driver.findElement(By.xpath("//button[@class='vh79eN']")).click();
+	    flipkart("Mega Bloks Build a Dinosaur CNV30");
+	    
+}
+
+private static void flipkart(String title) {
+	
+	String loc ="//a[@title='_']"; 
+	loc=loc.replace("_", title);
+	driver.findElement(By.xpath(loc)).click();
+    //driver.findElement(By.xpath("//*[@id=\"add-to-cart-button\"]")).click();
+}
+}
+
